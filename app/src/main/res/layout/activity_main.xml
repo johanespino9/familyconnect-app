@@ -24,7 +24,7 @@
             android:id="@+id/family_connect_logo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:layout_constraintBottom_toTopOf="@+id/email"
+            android:layout_margin="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Correo Electrónico"
-            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/password"
+            app:layout_constraintTop_toBottomOf="@+id/family_connect_logo" />
 
         <EditText
             android:id="@+id/password"
@@ -43,13 +43,13 @@
             android:layout_height="wrap_content"
             android:hint="Contraseña"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-            app:layout_constraintTop_toTopOf="@+id/email" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Iniciar Sesión"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
