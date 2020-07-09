@@ -1,6 +1,8 @@
 package com.johanespino.familyconnect
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -15,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
 
   private lateinit var auth: FirebaseAuth
+  val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -28,7 +31,18 @@ class MainActivity : AppCompatActivity() {
 
     btnLogin.setOnClickListener { view ->
       signIn(view, txtEmail.text.toString(), txtPassword.text.toString())
+      redirectActivity()
     }
+  }
+
+  fun redirectActivity() {
+//    val editText = findViewById<EditText>(R.id.editText)
+//    val message = editText.text.toString()
+
+    val intent = Intent(this, HomeActivity::class.java).apply {
+//      putExtra(EXTRA_MESSAGE, message)
+    }
+    startActivity(intent)
   }
 
   public override fun onStart() {
