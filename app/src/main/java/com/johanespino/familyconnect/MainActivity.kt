@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,13 +27,18 @@ class MainActivity : AppCompatActivity() {
 
     auth = Firebase.auth
 
-    var btnLogin = findViewById<Button>(R.id.btnLogin)
-    var txtEmail: EditText = findViewById(R.id.email) as EditText
-    var txtPassword: EditText = findViewById(R.id.password) as EditText
+    val btnLogin = findViewById<Button>(R.id.btnLogin)
+    val btnRegister = findViewById<Button>(R.id.btnRegister)
+    val txtEmail: EditText = findViewById(R.id.email) as EditText
+    val txtPassword: EditText = findViewById(R.id.password) as EditText
 
     btnLogin.setOnClickListener { view ->
       signIn(view, txtEmail.text.toString(), txtPassword.text.toString())
       redirectActivity()
+    }
+
+    btnRegister.setOnClickListener{view ->
+      registerUser()
     }
   }
 
@@ -41,6 +47,13 @@ class MainActivity : AppCompatActivity() {
 //    val message = editText.text.toString()
 
     val intent = Intent(this, HomeActivity::class.java).apply {
+//      putExtra(EXTRA_MESSAGE, message)
+    }
+    startActivity(intent)
+  }
+
+  fun registerUser(){
+    val intent = Intent(this, UserRegisterActivity::class.java).apply {
 //      putExtra(EXTRA_MESSAGE, message)
     }
     startActivity(intent)
