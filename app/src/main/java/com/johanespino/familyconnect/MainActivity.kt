@@ -34,10 +34,9 @@ class MainActivity : AppCompatActivity() {
 
     btnLogin.setOnClickListener { view ->
       signIn(view, txtEmail.text.toString(), txtPassword.text.toString())
-      redirectActivity()
     }
 
-    btnRegister.setOnClickListener{view ->
+    btnRegister.setOnClickListener { view ->
       registerUser()
     }
   }
@@ -71,7 +70,8 @@ class MainActivity : AppCompatActivity() {
       .addOnCompleteListener(this) { task ->
         if (task.isSuccessful) {
           Log.d("SIGIN", "signInWithEmail:success")
-
+          redirectActivity()
+          finish()
         } else {
           Log.w("SIGIN", "signInWithEmail:failure", task.exception)
           Toast.makeText(baseContext, "Authentication failed.",
