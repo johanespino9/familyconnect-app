@@ -40,23 +40,8 @@ class UserRegisterActivity : AppCompatActivity() {
             val password = etPassword.text
             val repeatedPassword = etRepeatedPassword.text
 
-            val user = hashMapOf(
-                "first" to "Ada",
-                "last" to "Lovelace",
-                "born" to 1815
-            )
 
-
-            dataBase.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference ->
-                    Log.d("TEST", "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w("TEST", "Error adding document", e)
-                }
-
-            if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()) {
+            if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()){
 
                 if (password.length >= 8) {
                     Log.d("LENGTH", "Password es mayor a 8 ")
@@ -78,7 +63,6 @@ class UserRegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     fun registerUser(
