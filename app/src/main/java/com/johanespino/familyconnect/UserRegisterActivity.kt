@@ -56,13 +56,23 @@ class UserRegisterActivity : AppCompatActivity() {
                     Log.w("TEST", "Error adding document", e)
                 }
 
-            if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()){
+            if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()) {
 
-                if(password.length >= 8){
+                if (password.length >= 8) {
                     Log.d("LENGTH", "Password es mayor a 8 ")
-                    registerUser(email.toString(), password.toString(), firstName.toString(), lastName.toString(), dataBase)
+                    registerUser(
+                        email.toString(),
+                        password.toString(),
+                        firstName.toString(),
+                        lastName.toString(),
+                        dataBase
+                    )
                 } else {
-                    Toast.makeText(this, "La contraseña debe tener 8 ó más caraceteres", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this,
+                        "La contraseña debe tener 8 ó más caraceteres",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
                 Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
@@ -71,7 +81,13 @@ class UserRegisterActivity : AppCompatActivity() {
 
     }
 
-    fun registerUser (email: String, password: String, firstName: String, lastName: String, database: FirebaseFirestore ) {
+    fun registerUser(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String,
+        database: FirebaseFirestore
+    ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -86,8 +102,10 @@ class UserRegisterActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 //                    updateUI(null)
                 }
 
@@ -95,7 +113,7 @@ class UserRegisterActivity : AppCompatActivity() {
             }
     }
 
-    fun registerUserInDB(userToCreate: HashMap<String,String>, database: FirebaseFirestore) {
+    fun registerUserInDB(userToCreate: HashMap<String, String>, database: FirebaseFirestore) {
         database.collection("users")
             .add(userToCreate)
             .addOnSuccessListener { documentReference ->
