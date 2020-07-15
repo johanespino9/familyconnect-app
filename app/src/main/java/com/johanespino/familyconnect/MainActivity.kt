@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     auth = Firebase.auth
 
-    val btnLogin = findViewById<Button>(R.id.btnLogin)
-    val btnRegister = findViewById<Button>(R.id.btnRegister)
-    val txtEmail: EditText = findViewById(R.id.email) as EditText
-    val txtPassword: EditText = findViewById(R.id.password) as EditText
+    val btnLogin = findViewById<Button>(R.id.btn_login_sign_in)
+    val btnRegister = findViewById<Button>(R.id.btn_login_register)
+    val txtEmail: EditText = findViewById(R.id.et_login_email) as EditText
+    val txtPassword: EditText = findViewById(R.id.et_login_password) as EditText
 
     btnLogin.setOnClickListener { view ->
       signIn(view, txtEmail.text.toString(), txtPassword.text.toString())
