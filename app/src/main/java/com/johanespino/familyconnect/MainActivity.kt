@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
   private lateinit var auth: FirebaseAuth
-  val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
+//  val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
