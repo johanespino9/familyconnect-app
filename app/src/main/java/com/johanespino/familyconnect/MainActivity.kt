@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 //  val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
@@ -34,14 +33,15 @@ class MainActivity : AppCompatActivity() {
 
     btnLogin.setOnClickListener { view ->
       signIn(view, txtEmail.text.toString(), txtPassword.text.toString())
+
     }
 
-    btnRegister.setOnClickListener { view ->
+    btnRegister.setOnClickListener {
       registerUser()
     }
   }
 
-  fun redirectActivity() {
+  private fun redirectActivity() {
 //    val editText = findViewById<EditText>(R.id.editText)
 //    val message = editText.text.toString()
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     startActivity(intent)
   }
 
-  fun registerUser(){
+  private fun registerUser(){
     val intent = Intent(this, UserRegisterActivity::class.java).apply {
 //      putExtra(EXTRA_MESSAGE, message)
     }
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
   }
 
 
-  fun signIn(view: View, email: String, password: String) {
+  private fun signIn(view: View, email: String, password: String) {
 
     auth.signInWithEmailAndPassword(email, password)
       .addOnCompleteListener(this) { task ->
