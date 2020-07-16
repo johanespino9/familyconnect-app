@@ -78,6 +78,8 @@
             android:layout_margin="10dp"
             android:text="Siguiente" />
 
+<!--        TODO: Agregar ProgressDialog-->
+
     </LinearLayout>
 
 

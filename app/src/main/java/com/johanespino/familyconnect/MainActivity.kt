@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     auth.signInWithEmailAndPassword(email, password)
       .addOnCompleteListener(this) { task ->
         if (task.isSuccessful) {
+          Toast.makeText(this, "Inicio sesion correctamente", Toast.LENGTH_SHORT).show()
           Log.d("SIGIN", "signInWithEmail:success")
           redirectActivity()
           finish()

@@ -52,6 +52,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         lastName.toString(),
                         dataBase
                     )
+                    Toast.makeText(this,  "Usuario Registrado correctamente", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(
                         this,
