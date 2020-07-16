@@ -20,6 +20,7 @@ import com.google.android.gms.location.*
 class HomeActivity : AppCompatActivity() {
     private lateinit var lat:TextView
     private lateinit var log:TextView
+    // que es el permission ID?
     val PERMISSION_ID=42;
     lateinit var mFausedLocationProviderClient: FusedLocationProviderClient
 
