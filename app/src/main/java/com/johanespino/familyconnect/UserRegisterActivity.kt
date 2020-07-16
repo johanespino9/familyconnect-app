@@ -103,7 +103,7 @@ class UserRegisterActivity : AppCompatActivity() {
             .add(userToCreate)
             .addOnSuccessListener { documentReference ->
                 Log.d("CREATE", "DocumentSnapshot added with ID: ${documentReference.id}")
-                redirectActivity()
+               redirectActivity()
                 finish()
             }
             .addOnFailureListener { e ->
