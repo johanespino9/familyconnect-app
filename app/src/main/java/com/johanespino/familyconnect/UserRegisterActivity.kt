@@ -1,5 +1,6 @@
 package com.johanespino.familyconnect
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -39,22 +40,6 @@ class UserRegisterActivity : AppCompatActivity() {
             val email = etEmail.text
             val password = etPassword.text
             val repeatedPassword = etRepeatedPassword.text
-
-            val user = hashMapOf(
-                "first" to "Ada",
-                "last" to "Lovelace",
-                "born" to 1815
-            )
-
-
-            dataBase.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference ->
-                    Log.d("TEST", "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w("TEST", "Error adding document", e)
-                }
 
             if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()) {
 
@@ -118,7 +103,8 @@ class UserRegisterActivity : AppCompatActivity() {
             .add(userToCreate)
             .addOnSuccessListener { documentReference ->
                 Log.d("CREATE", "DocumentSnapshot added with ID: ${documentReference.id}")
-
+                redirectActivity()
+                finish()
             }
             .addOnFailureListener { e ->
                 Log.w("CREATE", "Error adding document", e)
@@ -129,4 +115,13 @@ class UserRegisterActivity : AppCompatActivity() {
 //                    updateUI(user)
     }
 
+    fun redirectActivity() {
+//    val editText = findViewById<EditText>(R.id.editText)
+//    val message = editText.text.toString()
+
+        val intent = Intent(this, HomeActivity::class.java).apply {
+//      putExtra(EXTRA_MESSAGE, message)
+        }
+        startActivity(intent)
+    }
 }

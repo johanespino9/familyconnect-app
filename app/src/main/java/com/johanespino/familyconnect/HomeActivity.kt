@@ -1,21 +1,32 @@
 package com.johanespino.familyconnect
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+    }
 
-        // Get the Intent that started this activity and extract the string
-//        val message = intent.getStringExtra(EXTRA_MESSAGE)
+    private fun checkUserStatus(){
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            //Stay here if user is signed
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+    }}
 
-        // Capture the layout's TextView and set the string as its text
-//        val textView = findViewById<TextView>(R.id.textview).apply {
-//            text = message
-//        }
+    public override fun onStart() {
+        checkUserStatus()
+        super.onStart()
+
     }
 }
