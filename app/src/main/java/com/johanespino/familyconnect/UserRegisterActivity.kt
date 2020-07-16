@@ -1,5 +1,6 @@
 package com.johanespino.familyconnect
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -40,8 +41,7 @@ class UserRegisterActivity : AppCompatActivity() {
             val password = etPassword.text
             val repeatedPassword = etRepeatedPassword.text
 
-
-            if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()){
+            if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()) {
 
                 if (password.length >= 8) {
                     Log.d("LENGTH", "Password es mayor a 8 ")
@@ -64,6 +64,7 @@ class UserRegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     fun registerUser(
@@ -103,7 +104,8 @@ class UserRegisterActivity : AppCompatActivity() {
             .add(userToCreate)
             .addOnSuccessListener { documentReference ->
                 Log.d("CREATE", "DocumentSnapshot added with ID: ${documentReference.id}")
-
+               redirectActivity()
+                finish()
             }
             .addOnFailureListener { e ->
                 Log.w("CREATE", "Error adding document", e)
@@ -114,4 +116,13 @@ class UserRegisterActivity : AppCompatActivity() {
 //                    updateUI(user)
     }
 
+    fun redirectActivity() {
+//    val editText = findViewById<EditText>(R.id.editText)
+//    val message = editText.text.toString()
+
+        val intent = Intent(this, HomeActivity::class.java).apply {
+//      putExtra(EXTRA_MESSAGE, message)
+        }
+        startActivity(intent)
+    }
 }

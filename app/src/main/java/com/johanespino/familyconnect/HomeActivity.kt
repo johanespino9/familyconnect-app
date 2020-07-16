@@ -1,5 +1,8 @@
 package com.johanespino.familyconnect
 
+
+import android.content.Intent
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var lat:TextView
     private lateinit var log:TextView
     // que es el permission ID?
@@ -32,6 +36,18 @@ class HomeActivity : AppCompatActivity() {
         mFausedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
         getLastlocation();
     }
+  
+  
+    private fun checkUserStatus(){
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            //Stay here if user is signed
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+    }}
+  
     @SuppressLint("MissingPermission")
     private fun getLastlocation() {
         if(checkPermission()){
@@ -58,6 +74,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        checkUserStatus()
         getLastlocation();
     }
 
