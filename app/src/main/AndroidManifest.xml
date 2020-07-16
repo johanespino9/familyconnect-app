@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
-            >
+           android:theme="@style/SinToolbar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,8 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".UserRegisterActivity" />
+        <activity android:name=".UserRegisterActivity"
+            android:theme="@style/SinToolbar"/>
         <activity android:name=".HomeActivity" />
     </application>
 

@@ -2,6 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:drawable="@drawable/backgroud_gradient"/>
     <item>
-        <bitmap android:src="@drawable/ic_launcher" android:gravity="center"/>
+        <bitmap android:src="@mipmap/ic_launcher_foreground" android:gravity="center"/>
+
     </item>
+
 </layer-list>
