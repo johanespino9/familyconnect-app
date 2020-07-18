@@ -4,38 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#08090909"
+    android:backgroundTintMode="src_in"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
 
     <LinearLayout
+        android:id="@+id/mapa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:text="MAPA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textAlignment="center"/>
+            android:text="MAPA"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/tv_map_latitude"
-            android:text="Latitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textAlignment="center"/>
+            android:text="Latitude"
+            android:textAlignment="center" />
+
         <TextView
             android:id="@+id/tv_map_longitude"
-            android:text="Longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"/>
+            android:text="Longitude"
+            android:textAlignment="center" />
+
+
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapa"
+        app:menu="@menu/menu_nav"
+        tools:layout_editor_absoluteX="0dp">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>
