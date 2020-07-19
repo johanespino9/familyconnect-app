@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         navigationView.setOnNavigationItemSelectedListener(selectedListener)
 //home default
 // home default
-        val fragment1 = MapFragment()
+        val fragment1 = CreateFamilyGroup()
         val ft1 = supportFragmentManager.beginTransaction()
         ft1.replace(R.id.content, fragment1, "")
         ft1.commit()
@@ -69,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.nav_profile -> {
                     //profile fragment transaction
-                    val fragment2 = MapFragment()
+                    val fragment2 = CreateFamilyGroup()
                     val ft2 = supportFragmentManager.beginTransaction()
                     ft2.replace(R.id.content, fragment2, "")
                     ft2.commit()
