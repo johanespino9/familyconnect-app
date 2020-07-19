@@ -1,62 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="#08090909"
-    android:backgroundTintMode="src_in"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".HomeActivity">
-
-    <LinearLayout
-        android:id="@+id/mapa"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:id="@+id/content"
+        android:layout_above="@id/btn_nav">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="MAPA"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_map_latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Latitude"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_map_longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Longitude"
-            android:textAlignment="center" />
-
-
-    </LinearLayout>
-
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:id="@+id/btn_nav"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapa"
-        app:menu="@menu/menu_nav"
-        tools:layout_editor_absoluteX="0dp">
-
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_nav">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
