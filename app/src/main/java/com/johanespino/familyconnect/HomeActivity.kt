@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        checkUserStatus()
 //BottomNavigation
         val navigationView = findViewById<BottomNavigationView>(R.id.btn_nav)
         navigationView.setOnNavigationItemSelectedListener(selectedListener)
@@ -37,6 +38,25 @@ class HomeActivity : AppCompatActivity() {
         ft1.commit()
 
     }
+    //Revisar el estado del usuario
+    private fun checkUserStatus() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            //Si esta logeado se mantiene aqui
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        checkUserStatus()
+
+    }
+
     private val selectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem -> //handle
             when (menuItem.itemId) {
                 R.id.nav_home -> {
@@ -80,25 +100,6 @@ class HomeActivity : AppCompatActivity() {
             }
             false
         }
-    //Revisar el estado del usuario
-    private fun checkUserStatus() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            //Si esta logeado se mantiene aqui
-        } else {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        checkUserStatus()
-
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
