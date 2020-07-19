@@ -17,6 +17,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="85dp"
+            android:backgroundTint="#FFFFFF"
             android:gravity="center"
             android:text="Crear Grupo Familiar"
             android:textColor="#000000"
@@ -63,14 +64,14 @@
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btnagregarpariente"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
                 android:src="@drawable/ic_add"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                android:tint="#5C24BF" />
         </LinearLayout>
 
         <TextView
