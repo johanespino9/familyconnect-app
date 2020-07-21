@@ -26,16 +26,19 @@ class TypeAccount : AppCompatActivity() {
 
         //Planes de la aplicacion
         btnfree.setOnClickListener { v: View? ->
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this@TypeAccount, GroupAddActivity::class.java)
             startActivity(intent)
+            finish()
         }
         btngold.setOnClickListener { v: View? ->
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this@TypeAccount, GroupAddActivity::class.java)
             startActivity(intent)
+            finish()
         }
         btnblack.setOnClickListener { v: View? ->
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this@TypeAccount, GroupAddActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
     }

@@ -7,4 +7,6 @@
     <string name="plan_gratuito_hasta_3_familiares">PLAN GRATUITO HASTA 3 FAMILIARES</string>
     <string name="plan_gold_hasta_7_familiares">PLAN GOLD HASTA 7 FAMILIARES</string>
     <string name="plan_black_hasta_14_familiares">PLAN BLACK HASTA 14 FAMILIARES</string>
+    <string name="titulo_del_grupo">Titulo del grupo</string>
+    <string name="para_comenzar_cree_un_grupo_de_familia_facilmente">Para comenzar cree un grupo de familia facilmente</string>
 </resources>
