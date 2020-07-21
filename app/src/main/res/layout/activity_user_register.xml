@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".UserRegisterActivity">
 
     <LinearLayout
@@ -21,10 +22,11 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_margin="10dp"
+            android:layout_height="180dp"
             android:background="#FFFFFF"
+            android:contentDescription="TODO"
             android:scaleType="center"
+            app:srcCompat="@drawable/logofamilyconnectsincasa"
             tools:srcCompat="@drawable/logofamilyconnectsincasa" />
 
         <TextView

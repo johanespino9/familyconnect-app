@@ -52,7 +52,8 @@ class UserRegisterActivity : AppCompatActivity() {
                         lastName.toString(),
                         dataBase
                     )
-                    Toast.makeText(this,  "Usuario Registrado correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Usuario Registrado correctamente", Toast.LENGTH_SHORT)
+                        .show()
                 } else {
                     Toast.makeText(
                         this,
@@ -104,7 +105,7 @@ class UserRegisterActivity : AppCompatActivity() {
             .add(userToCreate)
             .addOnSuccessListener { documentReference ->
                 Log.d("CREATE", "DocumentSnapshot added with ID: ${documentReference.id}")
-               redirectActivity()
+                redirectActivity()
                 finish()
             }
             .addOnFailureListener { e ->
@@ -120,7 +121,7 @@ class UserRegisterActivity : AppCompatActivity() {
 //    val editText = findViewById<EditText>(R.id.editText)
 //    val message = editText.text.toString()
 
-        val intent = Intent(this, HomeActivity::class.java).apply {
+        val intent = Intent(this, TypeAccount::class.java).apply {
 //      putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)

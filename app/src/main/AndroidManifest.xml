@@ -3,8 +3,8 @@
     package="com.johanespino.familyconnect">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,27 +13,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-           android:theme="@style/SinToolbar" >
+        <activity
+            android:name=".TypeAccount"
+            android:theme="@style/SinToolbar">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SinToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashTheme"
+        <activity
+            android:name=".SplashTheme"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".UserRegisterActivity"
-            android:theme="@style/SinToolbar"/>
+        <activity
+            android:name=".UserRegisterActivity"
+            android:theme="@style/SinToolbar" />
         <activity android:name=".HomeActivity" />
     </application>
-
 
 </manifest>
