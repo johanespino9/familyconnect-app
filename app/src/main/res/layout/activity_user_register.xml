@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UserRegisterActivity">
 
-
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,18 +20,21 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
             android:layout_margin="10dp"
-            android:background="#FFFFFF" />
+            android:background="#FFFFFF"
+            android:scaleType="center"
+            tools:srcCompat="@drawable/logofamilyconnectsincasa" />
 
         <TextView
             android:id="@+id/tex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Ingrese sus datos"
+            android:text="Registrese y acceda a las funciones de FamilyConnect y mejore el cuidado de su familia"
             android:textAlignment="center"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -42,44 +43,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Ingrese su nombre" />
+            android:hint="Ingrese su nombre"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Ingrese su apellido" />
+            android:hint="Ingrese su apellido"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Ingrese su e-mail" />
+            android:hint="Ingrese su e-mail"
+            android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/et_password"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Cree su contraseña" />
+            app:passwordToggleEnabled="true">
 
-        <EditText
-            android:id="@+id/et_repeated_password"
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Cree su contraseña"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Repita la contraseña" />
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/et_repeated_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Repita la contraseña"
+                android:inputType="textPassword" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Siguiente" />
+            android:background="@drawable/corner"
+            android:backgroundTint="@color/ic_launcher_background"
+            android:text="Siguiente"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
-<!--        TODO: Agregar ProgressDialog-->
+        <!--        TODO: Agregar ProgressDialog-->
 
     </LinearLayout>
 
