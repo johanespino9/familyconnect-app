@@ -1,115 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:backgroundTint="#08090909"
+    android:backgroundTintMode="src_in"
     tools:context=".UserRegisterActivity">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="180dp"
+                android:background="#FFFFFF"
+                android:contentDescription="TODO"
+                android:scaleType="center"
+                app:srcCompat="@drawable/logofamilyconnectsincasa"
+                tools:srcCompat="@drawable/logofamilyconnectsincasa" />
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:background="#FFFFFF"
-            android:contentDescription="TODO"
-            android:scaleType="center"
-            app:srcCompat="@drawable/logofamilyconnectsincasa"
-            tools:srcCompat="@drawable/logofamilyconnectsincasa" />
-
-        <TextView
-            android:id="@+id/tex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Registrese y acceda a las funciones de FamilyConnect y mejore el cuidado de su familia"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/et_first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Ingrese su nombre"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/et_last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Ingrese su apellido"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Ingrese su e-mail"
-            android:inputType="textEmailAddress" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            <TextView
+                android:id="@+id/tex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Registrese y acceda a las funciones de FamilyConnect y mejore el cuidado de su familia"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_below="@id/logo"/>
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="Cree su contraseña"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+                android:hint="Ingrese su nombre"
+                android:layout_below="@+id/tex"
+                android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/et_repeated_password"
+                android:id="@+id/et_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="Repita la contraseña"
-                android:inputType="textPassword" />
+                android:hint="Ingrese su apellido"
+                android:layout_below="@id/et_first_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@id/et_last_name"
+                android:hint="Ingrese su e-mail"
+                android:inputType="textEmailAddress" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_below="@id/et_email">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Cree su contraseña"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_below="@id/passwordID"
+                android:id="@+id/passwordrepeatID">
+
+                <EditText
+                    android:id="@+id/et_repeated_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="10dp"
+                    android:hint="Repita la contraseña"
+                    android:inputType="textPassword" />
 
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/corner"
-            android:backgroundTint="@color/ic_launcher_background"
-            android:text="Siguiente"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_below="@id/passwordrepeatID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/corner"
+                android:backgroundTint="@color/ic_launcher_background"
+                android:text="Siguiente"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-        <!--        TODO: Agregar ProgressDialog-->
+            <!--        TODO: Agregar ProgressDialog-->
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
