@@ -35,6 +35,7 @@ public class CreateFamilyGroup extends Fragment {
     //Instancia de Firebase
     private FirebaseAuth mAuth;
 
+
     public CreateFamilyGroup() {
 
     }
@@ -65,15 +66,15 @@ public class CreateFamilyGroup extends Fragment {
     }
 
     private void uploadData(final String email) {
-
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
         //Registrar usuario
         // final String id= UUID.randomUUID().toString();
         final String password = "12345678";
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser user = auth.getCurrentUser();
                     String id = user.getUid();
 
                     //crear objeto para subir
@@ -86,18 +87,21 @@ public class CreateFamilyGroup extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(getContext(), "Mensaje enviado", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(getContext(), "Envio fallido", Toast.LENGTH_SHORT).show(); } }
+                                                Toast.makeText(getContext(), "Envio fallido", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }});
+                                        }
+                                    });
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override

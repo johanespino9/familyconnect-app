@@ -1,23 +1,23 @@
 package com.johanespino.familyconnect
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 class UserRegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-//    private lateinit var dataBase: FirebaseFirestore
 
+    //    private lateinit var dataBase: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
@@ -68,8 +68,9 @@ class UserRegisterActivity : AppCompatActivity() {
 
     }
 
-    fun registerUser(
-        email: String,
+    private fun registerUser(
+
+        email : String,
         password: String,
         firstName: String,
         lastName: String,
@@ -82,7 +83,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         "firstName" to firstName,
                         "lastName" to lastName,
                         "email" to email,
-                        "role" to "ADMIN"
+                        "role" to "admin"
                     )
 
                     registerUserInDB(userToCreate, database)
@@ -100,16 +101,19 @@ class UserRegisterActivity : AppCompatActivity() {
             }
     }
 
-    fun registerUserInDB(userToCreate: HashMap<String, String>, database: FirebaseFirestore) {
+    private fun registerUserInDB(userToCreate: HashMap<String, String>, database: FirebaseFirestore) {
+        val loadingDialog = LoadingDialog(this@UserRegisterActivity)
+        loadingDialog.startloadingAlertDialog()
         database.collection("users")
-            .add(userToCreate)
+            .document(auth.uid.toString()).set(userToCreate)
             .addOnSuccessListener { documentReference ->
-                Log.d("CREATE", "DocumentSnapshot added with ID: ${documentReference.id}")
+               loadingDialog.dismissLoadingAlertDialog()
                 redirectActivity()
+
                 finish()
             }
             .addOnFailureListener { e ->
-                Log.w("CREATE", "Error adding document", e)
+
             }
         // Sign in success, update UI with the signed-in user's information
         Log.d("REGISTER", "createUserWithEmail:success")
@@ -117,13 +121,15 @@ class UserRegisterActivity : AppCompatActivity() {
 //                    updateUI(user)
     }
 
-    fun redirectActivity() {
+    private fun redirectActivity() {
+        val user = auth.currentUser
+        val id = user!!.uid
 //    val editText = findViewById<EditText>(R.id.editText)
 //    val message = editText.text.toString()
-
-        val intent = Intent(this, TypeAccount::class.java).apply {
-//      putExtra(EXTRA_MESSAGE, message)
-        }
+        val intent = Intent(this, TypeAccount::class.java)
+        val b: Bundle = Bundle()
+        b.putString("uid", id)
+        intent.putExtras(b)
         startActivity(intent)
     }
 }
