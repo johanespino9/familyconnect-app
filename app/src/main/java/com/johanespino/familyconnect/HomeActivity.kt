@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.nav_profile -> {
                     //profile fragment transaction
-                    val fragment2 = MapFragment()
+                    val fragment2 = CreateFamilyGroup()
                     val ft2 = supportFragmentManager.beginTransaction()
                     ft2.replace(R.id.content, fragment2, "")
                     ft2.commit()
