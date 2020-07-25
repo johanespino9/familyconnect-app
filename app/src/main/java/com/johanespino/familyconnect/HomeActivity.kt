@@ -43,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
         // Colocamos el String
         //args.putString("timeStamp", timeStamp)
         // Supongamos que tu Fragment se llama TestFragment. Colocamos este nuevo Bundle como argumento en el fragmento.
-        val fragment1 = CreateFamilyGroup()
+        val fragment1 = PerfilUsuario()
         //fragment1.setArguments(args)
         val ft1 = supportFragmentManager.beginTransaction()
         ft1.replace(R.id.content, fragment1, "")
@@ -86,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.nav_profile -> {
                     //profile fragment transaction
-                    val fragment2 = CreateFamilyGroup()
+                    val fragment2 = PerfilUsuario()
                     val ft2 = supportFragmentManager.beginTransaction()
                     ft2.replace(R.id.content, fragment2, "")
                     ft2.commit()
