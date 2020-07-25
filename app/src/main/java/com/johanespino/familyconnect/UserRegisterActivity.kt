@@ -1,5 +1,6 @@
 package com.johanespino.familyconnect
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +12,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_user_register.*
 
 
 class UserRegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var etEmail: EditText;
+    private lateinit var etPassword: EditText;
 
     //    private lateinit var dataBase: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +30,8 @@ class UserRegisterActivity : AppCompatActivity() {
         val dataBase = FirebaseFirestore.getInstance()
         val etFirstName = findViewById<EditText>(R.id.et_first_name)
         val etLastName = findViewById<EditText>(R.id.et_last_name)
-        val etEmail = findViewById<EditText>(R.id.et_email)
-        val etPassword = findViewById<EditText>(R.id.et_password)
+        etEmail = findViewById(R.id.et_email)
+        etPassword = findViewById(R.id.et_password)
         val etRepeatedPassword = findViewById<EditText>(R.id.et_repeated_password)
         val btnNext = findViewById<Button>(R.id.btn_next)
 
@@ -115,8 +119,8 @@ class UserRegisterActivity : AppCompatActivity() {
             .document(auth.uid.toString()).set(userToCreate)
             .addOnSuccessListener { documentReference ->
                 loadingDialog.dismissLoadingAlertDialog()
+                savePreferences()
                 redirectActivity()
-
                 finish()
             }
             .addOnFailureListener { e ->
@@ -136,4 +140,15 @@ class UserRegisterActivity : AppCompatActivity() {
         val intent = Intent(this, TypeAccount::class.java)
         startActivity(intent)
     }
+
+    private fun savePreferences() {
+        val preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE)
+        val correo: String = etEmail.text.toString()
+        val passwo: String = etPassword.text.toString()
+        val editor = preferences.edit()
+        editor.putString("email", correo)
+        editor.putString("password", passwo)
+        editor.apply()
+    }
+
 }
