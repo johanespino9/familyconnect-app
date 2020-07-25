@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,29 +33,45 @@ class HomeActivity : AppCompatActivity() {
         navigationView.setOnNavigationItemSelectedListener(selectedListener)
 //home default
 // home default
+
+        // Obtienes el Bundle del Intent
+      //  val bundle = intent.extras
+        // Obtienes el texto
+       // val timeStamp = bundle!!.getString("timeStamp")
+        // Creamos un nuevo Bundle
+        //val args = Bundle()
+        // Colocamos el String
+        //args.putString("timeStamp", timeStamp)
+        // Supongamos que tu Fragment se llama TestFragment. Colocamos este nuevo Bundle como argumento en el fragmento.
         val fragment1 = CreateFamilyGroup()
+        //fragment1.setArguments(args)
         val ft1 = supportFragmentManager.beginTransaction()
         ft1.replace(R.id.content, fragment1, "")
         ft1.commit()
+
+
+
+
 
     }
     //Revisar el estado del usuario
     private fun checkUserStatus() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
+            Toast.makeText(this,"gaa"+user.email,Toast.LENGTH_LONG).show();
             //Si esta logeado se mantiene aqui
         } else {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+
     }
 
 
     override fun onStart() {
         super.onStart()
         checkUserStatus()
-
     }
 
     private val selectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem -> //handle
@@ -130,7 +147,5 @@ class HomeActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
-
-
 
 }
