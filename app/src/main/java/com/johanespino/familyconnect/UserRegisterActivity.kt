@@ -69,7 +69,6 @@ class UserRegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(
-
         email : String,
         password: String,
         firstName: String,
@@ -79,11 +78,16 @@ class UserRegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    val uid = user!!.uid
+
                     val userToCreate = hashMapOf(
+                        "uid" to uid,
                         "firstName" to firstName,
                         "lastName" to lastName,
                         "email" to email,
-                        "role" to "admin"
+                        "role" to "admin",
+                        "imagen" to "no imagen"
                     )
 
                     registerUserInDB(userToCreate, database)
@@ -127,9 +131,6 @@ class UserRegisterActivity : AppCompatActivity() {
 //    val editText = findViewById<EditText>(R.id.editText)
 //    val message = editText.text.toString()
         val intent = Intent(this, TypeAccount::class.java)
-        val b: Bundle = Bundle()
-        b.putString("uid", id)
-        intent.putExtras(b)
         startActivity(intent)
     }
 }
