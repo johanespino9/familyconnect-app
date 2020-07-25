@@ -40,9 +40,6 @@ public class GroupAddActivity extends AppCompatActivity {
                 final String g_timeStamp = "" + System.currentTimeMillis();
                 final String grouptit = etxttitle.getText().toString().trim();
                 creategroup(g_timeStamp, grouptit);
-                Intent intent = new Intent(GroupAddActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
 
@@ -67,6 +64,7 @@ public class GroupAddActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(GroupAddActivity.this, "Grupo creado", Toast.LENGTH_SHORT).show();
+                                redirectActivity(g_timeStamp);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -85,5 +83,22 @@ public class GroupAddActivity extends AppCompatActivity {
     }
 
 //crear activity para añadir participantes
+private void redirectActivity(String g_timeStamp) {
+   // String timeStamp=g_timeStamp;
+    Bundle bundle = new Bundle();
+    // Inicializas el Intent
+    Intent intent = new Intent(GroupAddActivity.this, AddUserGroup.class);
+    // Información del EditText
+    String timeStamp=g_timeStamp;
+    // Agregas la información del EditText al Bundle
+    bundle.putString("timeStamp",timeStamp);
+    // Agregas el Bundle al Intent e inicias ActivityB
+    intent.putExtras(bundle);
+    startActivity(intent);
+}
+
+
+
+
 
 }

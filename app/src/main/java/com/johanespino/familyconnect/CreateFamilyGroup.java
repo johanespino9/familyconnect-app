@@ -29,11 +29,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class CreateFamilyGroup extends Fragment {
-    EditText email_pariente;
-    ImageButton btnAgregar;
-    FirebaseFirestore db;
-    //Instancia de Firebase
-    private FirebaseAuth mAuth;
+
 
 
     public CreateFamilyGroup() {
@@ -50,82 +46,10 @@ public class CreateFamilyGroup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_family_group, container, false);
-        email_pariente = v.findViewById(R.id.email_pariente);
-        db = FirebaseFirestore.getInstance();
-        //Obtener instancia
-        mAuth = FirebaseAuth.getInstance();
-        btnAgregar = v.findViewById(R.id.btnagregarpariente);
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = email_pariente.getText().toString().trim();
-                uploadData(email);
-            }
-        });
+
         return v;
     }
 
-    private void uploadData(final String email) {
-        final FirebaseAuth auth = FirebaseAuth.getInstance();
-        //Registrar usuario
-        // final String id= UUID.randomUUID().toString();
-        final String password = "12345678";
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = auth.getCurrentUser();
-                    String id = user.getUid();
-
-                    //crear objeto para subir
-                    Map<String, Object> doc = new HashMap<>();
-                    doc.put("id", id);
-                    doc.put("email", email);
-
-                    //subir a firestore
-                    db.collection("users").document(id).set(doc)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(getContext(), "Mensaje enviado", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(getContext(), "Envio fallido", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    Toast.makeText(getContext(), "Registrado\n" + user.getEmail(), Toast.LENGTH_SHORT).show();
-                    // Una vez receptemos el evento, usaremos Bundle e Intent para pasar datos de una Activity a otra
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(getContext(), "Autenticacion fallida", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
 
 
-    }
 }
