@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class AddUserGroup extends AppCompatActivity {
         Bundle parametros = this.getIntent().getExtras();
         timeStamp = parametros.getString("timeStamp");
         btnAgregar = findViewById(R.id.btnagregarpariente);
-        btnNext=findViewById(R.id.NextBtn);
+        btnNext = findViewById(R.id.NextBtn);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +60,7 @@ public class AddUserGroup extends AppCompatActivity {
             }
         });
     }
+
     private void uploadData(final String email) {
         final FirebaseAuth auth = FirebaseAuth.getInstance();
         //Registrar usuario
@@ -72,12 +74,12 @@ public class AddUserGroup extends AppCompatActivity {
                     String uid = user.getUid();
                     //crear objeto para subir
                     Map<String, Object> doc = new HashMap<>();
-                    doc.put("uid",uid);
+                    doc.put("uid", uid);
                     doc.put("firstName", "");
                     doc.put("lastName", "");
                     doc.put("email", email);
-                    doc.put("role","participante");
-                    doc.put("imagen","no imagen");
+                    doc.put("role", "participante");
+                    doc.put("imagen", "no imagen");
 
                     //subir a firestore
                     db.collection("users").document(uid).set(doc)
@@ -94,7 +96,7 @@ public class AddUserGroup extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(AddUserGroup.this, "Usuario agregado al grupo", Toast.LENGTH_SHORT).show();
-
+                                                    cargarCredenciales();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -152,13 +154,32 @@ public class AddUserGroup extends AppCompatActivity {
         // Inicializas el Intent
         Intent intent = new Intent(AddUserGroup.this, HomeActivity.class);
         // Información del EditText
-        String timeStamp=g_timeStamp;
+        String timeStamp = g_timeStamp;
         // Agregas la información del EditText al Bundle
-        bundle.putString("timeStamp",timeStamp);
+        bundle.putString("timeStamp", timeStamp);
         // Agregas el Bundle al Intent e inicias ActivityB
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
+    //vuelve al usuario original
+    private void cargarCredenciales() {
+        final FirebaseAuth auth2 = FirebaseAuth.getInstance();
+        SharedPreferences preferences = getSharedPreferences("credenciales", MODE_PRIVATE);
+        String correo = preferences.getString("email", "No existe la informacion");
+        String password = preferences.getString("password", "No existe la informacion");
+        auth2.signInWithEmailAndPassword(correo, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+    }
 
 }

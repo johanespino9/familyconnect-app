@@ -58,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
     private fun checkUserStatus() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            Toast.makeText(this,"gaa"+user.email,Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"En sesion: "+user.email,Toast.LENGTH_LONG).show();
             //Si esta logeado se mantiene aqui
         } else {
             val intent = Intent(this, MainActivity::class.java)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    android:padding="30dp"
+    android:padding="10dp"
     tools:context=".AddUserGroup">
 
     <LinearLayout
@@ -87,13 +87,14 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="307dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp" />
 
 
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/NextBtn"
         android:layout_width="wrap_content"
