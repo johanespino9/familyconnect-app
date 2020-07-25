@@ -41,5 +41,6 @@ class TypeAccount : AppCompatActivity() {
             finish()
         }
 
+
     }
 }

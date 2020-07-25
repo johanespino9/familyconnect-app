@@ -87,6 +87,7 @@ public class CreateFamilyGroup extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+
                                     auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -95,6 +96,8 @@ public class CreateFamilyGroup extends Fragment {
                                             } else {
                                                 Toast.makeText(getContext(), "Envio fallido", Toast.LENGTH_SHORT).show();
                                             }
+
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override

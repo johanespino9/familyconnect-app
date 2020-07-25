@@ -70,7 +70,7 @@ class UserRegisterActivity : AppCompatActivity() {
 
     private fun registerUser(
 
-        email : String,
+        email: String,
         password: String,
         firstName: String,
         lastName: String,
@@ -101,13 +101,16 @@ class UserRegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun registerUserInDB(userToCreate: HashMap<String, String>, database: FirebaseFirestore) {
+    private fun registerUserInDB(
+        userToCreate: HashMap<String, String>,
+        database: FirebaseFirestore
+    ) {
         val loadingDialog = LoadingDialog(this@UserRegisterActivity)
         loadingDialog.startloadingAlertDialog()
         database.collection("users")
             .document(auth.uid.toString()).set(userToCreate)
             .addOnSuccessListener { documentReference ->
-               loadingDialog.dismissLoadingAlertDialog()
+                loadingDialog.dismissLoadingAlertDialog()
                 redirectActivity()
 
                 finish()
