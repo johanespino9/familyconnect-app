@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect.Fragments
+package com.johanespino.familyconnect
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -19,8 +19,6 @@ import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.johanespino.familyconnect.Activities.MainActivity
-import com.johanespino.familyconnect.R
 
 
 class MapFragment : Fragment() {

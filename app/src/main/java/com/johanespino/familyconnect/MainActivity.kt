@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect.Activities
+package com.johanespino.familyconnect
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.johanespino.familyconnect.R
-import com.johanespino.familyconnect.UserRegisterActivity
 
 
 class MainActivity : AppCompatActivity() {
