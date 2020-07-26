@@ -7,14 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,15 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
-import com.johanespino.familyconnect.R;
-
 public class PerfilUsuario extends Fragment {
     //Firebase
     FirebaseAuth firebaseAuth;
@@ -49,6 +40,7 @@ public class PerfilUsuario extends Fragment {
     private static final int STORAGE_REQUEST_CODE = 200;
     private static final int IMAGE_PICK_GALLERY_CODE = 300;
     private static final int IMAGE_PICK_CAMERA_CODE = 400;
+
 
     String cameraPermissions[];
     String storagePermissions[];
@@ -105,6 +97,7 @@ public class PerfilUsuario extends Fragment {
                     } catch (Exception ex) {
                         Picasso.get().load(R.drawable.ic_profile_default).into(avatarTv);
                     }
+
 
 
                 }
