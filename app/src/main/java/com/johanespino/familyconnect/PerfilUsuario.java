@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect.Fragments;
+package com.johanespino.familyconnect;
 
 import android.os.Bundle;
 

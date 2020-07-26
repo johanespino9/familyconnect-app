@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect.Activities
+package com.johanespino.familyconnect
 
 
 import android.content.Intent
@@ -14,10 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.johanespino.familyconnect.Fragments.MapFragment
-import com.johanespino.familyconnect.Fragments.ListUserFragment
-import com.johanespino.familyconnect.Fragments.PerfilUsuario
-import com.johanespino.familyconnect.R
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth

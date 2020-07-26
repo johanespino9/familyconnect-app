@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.johanespino.familyconnect.Activities.HomeActivity;
-
 public class SplashTheme extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

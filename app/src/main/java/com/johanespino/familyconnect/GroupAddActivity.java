@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect.Activities;
+package com.johanespino.familyconnect;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.johanespino.familyconnect.R;
 
 import java.util.HashMap;
 
