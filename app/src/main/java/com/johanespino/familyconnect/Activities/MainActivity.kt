@@ -1,8 +1,7 @@
-package com.johanespino.familyconnect
+package com.johanespino.familyconnect.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -12,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
+import com.johanespino.familyconnect.R
+import com.johanespino.familyconnect.UserRegisterActivity
 
 
 class MainActivity : AppCompatActivity() {

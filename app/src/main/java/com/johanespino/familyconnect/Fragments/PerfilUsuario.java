@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect;
+package com.johanespino.familyconnect.Fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.johanespino.familyconnect.R;
 
 public class PerfilUsuario extends Fragment {
 
