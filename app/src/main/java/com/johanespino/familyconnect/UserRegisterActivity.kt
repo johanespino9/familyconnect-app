@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_user_register.*
 
 
 class UserRegisterActivity : AppCompatActivity() {
@@ -91,7 +90,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         "lastName" to lastName,
                         "email" to email,
                         "role" to "admin",
-                        "imagen" to "no imagen"
+                        "imagen" to ""
                     )
 
                     registerUserInDB(userToCreate, database)

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -79,7 +78,7 @@ public class AddUserGroup extends AppCompatActivity {
                     doc.put("lastName", "");
                     doc.put("email", email);
                     doc.put("role", "participante");
-                    doc.put("imagen", "no imagen");
+                    doc.put("imagen", "");
 
                     //subir a firestore
                     db.collection("users").document(uid).set(doc)
