@@ -1,4 +1,4 @@
-package com.johanespino.familyconnect
+package com.johanespino.familyconnect.Activities
 
 
 import android.content.Intent
@@ -14,6 +14,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.johanespino.familyconnect.Fragments.MapFragment
+import com.johanespino.familyconnect.Fragments.ListUserFragment
+import com.johanespino.familyconnect.Fragments.PerfilUsuario
+import com.johanespino.familyconnect.R
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -35,9 +39,9 @@ class HomeActivity : AppCompatActivity() {
 // home default
 
         // Obtienes el Bundle del Intent
-      //  val bundle = intent.extras
+        //  val bundle = intent.extras
         // Obtienes el texto
-       // val timeStamp = bundle!!.getString("timeStamp")
+        // val timeStamp = bundle!!.getString("timeStamp")
         // Creamos un nuevo Bundle
         //val args = Bundle()
         // Colocamos el String
@@ -50,15 +54,13 @@ class HomeActivity : AppCompatActivity() {
         ft1.commit()
 
 
-
-
-
     }
+
     //Revisar el estado del usuario
     private fun checkUserStatus() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            Toast.makeText(this,"En sesion: "+user.email,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "En sesion: " + user.email, Toast.LENGTH_LONG).show();
             //Si esta logeado se mantiene aqui
         } else {
             val intent = Intent(this, MainActivity::class.java)
@@ -74,44 +76,50 @@ class HomeActivity : AppCompatActivity() {
         checkUserStatus()
     }
 
-    private val selectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem -> //handle
+    private val selectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { menuItem -> //handle
             when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    //home fragment transaction
-                    val fragment1 = MapFragment()
-                    val ft1 = supportFragmentManager.beginTransaction()
-                    ft1.replace(R.id.content, fragment1, "")
-                    ft1.commit()
-                    return@OnNavigationItemSelectedListener true
-                }
                 R.id.nav_profile -> {
                     //profile fragment transaction
-                    val fragment2 = PerfilUsuario()
+                    val fragment2 =
+                        PerfilUsuario()
                     val ft2 = supportFragmentManager.beginTransaction()
                     ft2.replace(R.id.content, fragment2, "")
                     ft2.commit()
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.nav_users -> {
-                    //users fragment transaction
-                    val fragment3 = MapFragment()
-                    val ft3 = supportFragmentManager.beginTransaction()
-                    ft3.replace(R.id.content, fragment3, "")
-                    ft3.commit()
+                R.id.nav_locate -> {
+                    //home fragment transaction
+                    val fragment1 =
+                        MapFragment()
+                    val ft1 = supportFragmentManager.beginTransaction()
+                    ft1.replace(R.id.content, fragment1, "")
+                    ft1.commit()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.nav_mapa -> {
-                    val fragment4 = MapFragment()
+                    val fragment4 =
+                        MapFragment()
                     val ft4 = supportFragmentManager.beginTransaction()
                     ft4.replace(R.id.content, fragment4, "")
                     ft4.commit()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.nav_chat -> {
-                    val fragment5 = MapFragment()
+                    val fragment5 =
+                        ListUserFragment()
                     val ft5 = supportFragmentManager.beginTransaction()
                     ft5.replace(R.id.content, fragment5, "")
                     ft5.commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.nav_alerts -> {
+                    //users fragment transaction
+                    val fragment3 =
+                        MapFragment()
+                    val ft3 = supportFragmentManager.beginTransaction()
+                    ft3.replace(R.id.content, fragment3, "")
+                    ft3.commit()
                     return@OnNavigationItemSelectedListener true
                 }
             }

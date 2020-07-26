@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_user_register.*
+import com.johanespino.familyconnect.Activities.TypeAccount
 
 
 class UserRegisterActivity : AppCompatActivity() {

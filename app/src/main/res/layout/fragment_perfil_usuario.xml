@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1EBEB"
-    tools:context=".PerfilUsuario">
+    tools:context=".Fragments.PerfilUsuario">
 
 
     <ScrollView
@@ -251,6 +251,7 @@
                             android:orientation="vertical">
 
                             <ImageView
+
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center_horizontal"

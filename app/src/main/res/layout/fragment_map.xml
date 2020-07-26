@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapFragment"
+    tools:context=".Fragments.MapFragment"
     android:layout_gravity="center"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true">
