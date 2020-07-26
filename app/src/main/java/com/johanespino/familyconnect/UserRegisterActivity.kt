@@ -91,7 +91,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         "lastName" to lastName,
                         "email" to email,
                         "role" to "admin",
-                        "imagen" to "no imagen"
+                        "imagen" to ""
                     )
 
                     registerUserInDB(userToCreate, database)
