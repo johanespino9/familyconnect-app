@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +40,7 @@ public class PerfilUsuario extends Fragment {
     private static final int STORAGE_REQUEST_CODE = 200;
     private static final int IMAGE_PICK_GALLERY_CODE = 300;
     private static final int IMAGE_PICK_CAMERA_CODE = 400;
+
 
     String cameraPermissions[];
     String storagePermissions[];
@@ -95,6 +97,7 @@ public class PerfilUsuario extends Fragment {
                     } catch (Exception ex) {
                         Picasso.get().load(R.drawable.ic_profile_default).into(avatarTv);
                     }
+
 
 
                 }
