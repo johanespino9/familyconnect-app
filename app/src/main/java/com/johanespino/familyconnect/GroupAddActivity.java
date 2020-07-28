@@ -3,7 +3,9 @@ package com.johanespino.familyconnect;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,7 +40,9 @@ public class GroupAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String g_timeStamp = "" + System.currentTimeMillis();
                 final String grouptit = etxttitle.getText().toString().trim();
+                savePreferencesGroup(g_timeStamp);
                 creategroup(g_timeStamp, grouptit);
+
             }
         });
 
@@ -60,12 +64,12 @@ public class GroupAddActivity extends AppCompatActivity {
                         FirebaseFirestore db1 = FirebaseFirestore.getInstance();
                         db1.collection("groups").document(g_timeStamp).collection("participants").document(firebaseAuth.getUid()).set(hashMap1)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(GroupAddActivity.this, "Grupo creado", Toast.LENGTH_SHORT).show();
-                                redirectActivity(g_timeStamp);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(GroupAddActivity.this, "Grupo creado", Toast.LENGTH_SHORT).show();
+                                        redirectActivity(g_timeStamp);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(GroupAddActivity.this, "Error al añadir administrador", Toast.LENGTH_SHORT).show();
@@ -81,22 +85,29 @@ public class GroupAddActivity extends AppCompatActivity {
 
     }
 
-//crear activity para añadir participantes
-private void redirectActivity(String g_timeStamp) {
-   // String timeStamp=g_timeStamp;
-    Bundle bundle = new Bundle();
-    // Inicializas el Intent
-    Intent intent = new Intent(GroupAddActivity.this, AddUserGroup.class);
-    // Información del EditText
-    String timeStamp=g_timeStamp;
-    // Agregas la información del EditText al Bundle
-    bundle.putString("timeStamp",timeStamp);
-    // Agregas el Bundle al Intent e inicias ActivityB
-    intent.putExtras(bundle);
-    startActivity(intent);
-}
+    //crear activity para añadir participantes
+    private void redirectActivity(String g_timeStamp) {
+        // String timeStamp=g_timeStamp;
+        Bundle bundle = new Bundle();
+        // Inicializas el Intent
+        Intent intent = new Intent(GroupAddActivity.this, AddUserGroup.class);
+        // Información del EditText
+        String timeStamp = g_timeStamp;
+        // Agregas la información del EditText al Bundle
+        bundle.putString("timeStamp", timeStamp);
+        // Agregas el Bundle al Intent e inicias ActivityB
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
-
+    //subir crendencial de grupo
+    private void savePreferencesGroup(String timeStamp) {
+        SharedPreferences preferences = getSharedPreferences("groupcredenciales", Context.MODE_PRIVATE);
+        String groupid = timeStamp;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("groupId",groupid);
+        editor.apply();
+    }
 
 
 }
