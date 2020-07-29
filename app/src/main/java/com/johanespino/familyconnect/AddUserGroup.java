@@ -78,6 +78,7 @@ public class AddUserGroup extends AppCompatActivity {
                     doc.put("lastName", "");
                     doc.put("email", email);
                     doc.put("role", "participante");
+                    doc.put("onlineStatus", "online");
                     doc.put("imagen", "");
 
                     //subir a firestore

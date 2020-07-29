@@ -89,6 +89,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         "firstName" to firstName,
                         "lastName" to lastName,
                         "email" to email,
+                        "onlineStatus" to "online",
                         "role" to "admin",
                         "imagen" to ""
                     )
