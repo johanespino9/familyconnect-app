@@ -90,7 +90,8 @@ public class AddUserGroup extends AppCompatActivity {
                                     hashMap1.put("role", "participante");
                                     hashMap1.put("timeStamp", timeStamp);
                                     FirebaseFirestore db1 = FirebaseFirestore.getInstance();
-                                    db1.collection("groups").document(timeStamp).collection("participants").document(auth.getUid()).set(hashMap1)
+                                    db1.collection("groups").document(timeStamp).collection("participants").
+                                            document(auth.getUid()).set(hashMap1)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
