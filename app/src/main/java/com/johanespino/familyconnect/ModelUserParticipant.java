@@ -1,9 +1,9 @@
 package com.johanespino.familyconnect;
 
-public class ModelUser {
+public class ModelUserParticipant {
     String email, firstName, imagen, lastName, role, uid, onlineStatus,groupid;
 
-    public ModelUser(String email, String firstName, String imagen, String lastName, String role, String uid, String onlineStatus, String groupid) {
+    public ModelUserParticipant(String email, String firstName, String imagen, String lastName, String role, String uid, String onlineStatus, String groupid) {
         this.email = email;
         this.firstName = firstName;
         this.imagen = imagen;
@@ -14,17 +14,7 @@ public class ModelUser {
         this.groupid = groupid;
     }
 
-    public ModelUser(String email, String firstName, String imagen, String lastName, String role, String uid, String onlineStatus) {
-        this.email = email;
-        this.firstName = firstName;
-        this.imagen = imagen;
-        this.lastName = lastName;
-        this.role = role;
-        this.uid = uid;
-        this.onlineStatus = onlineStatus;
-    }
-
-    public ModelUser() {
+    public ModelUserParticipant() {
     }
 
     public String getOnlineStatus() {
@@ -79,15 +69,15 @@ public class ModelUser {
         return uid;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getGroupid() {
         return groupid;
     }
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 }
