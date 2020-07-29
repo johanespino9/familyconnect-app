@@ -176,9 +176,10 @@ public class ChatActivity extends AppCompatActivity {
                     if (mDocument.getType() == DocumentChange.Type.ADDED) {
 
                         Chat chat = mDocument.getDocument().toObject(Chat.class);
+                        if (chat != null){
                         if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid) || chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)) {
                             chatList.add(chat);
-                        }
+                        }}
                         adapterChat = new AdapterChat(ChatActivity.this, chatList, hisImage);
                         adapterChat.notifyDataSetChanged();
                         recyclerView.setAdapter(adapterChat);
