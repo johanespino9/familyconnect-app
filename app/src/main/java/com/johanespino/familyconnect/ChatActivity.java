@@ -261,7 +261,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void checkOnlineStatus(String status) {
-        DocumentReference dbref = FirebaseFirestore.getInstance().collection("usuarios").document(myUid);
+        DocumentReference dbref = FirebaseFirestore.getInstance().collection("users").document(myUid);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("onlineStatus", status);
         dbref.update(hashMap);
