@@ -17,14 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CodeVerificationActivity">
-
-        </activity>
+        <activity android:name=".Support"></activity>
+        <activity android:name=".TypePlan" />
+        <activity android:name=".CodeVerificationActivity" />
         <activity
             android:name=".ChatActivity"
-            android:theme="@style/SinToolbar">
+            android:theme="@style/SinToolbar" />
 
-        </activity>
         <activity
             android:name=".AddUserGroup"
             android:theme="@style/SinToolbar" />
