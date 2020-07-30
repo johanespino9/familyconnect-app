@@ -88,7 +88,36 @@ public class ListUserFragment extends Fragment {
         if ("No existe la informacion".equals(groupid)) {
             final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
             //Obtenenemos la lista de usuarios
+            firestore.collection("groups").document(groupid).
+                    collection("participants").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    for (DocumentChange mDocument : value.getDocumentChanges()) {
+                        if (mDocument.getType() == DocumentChange.Type.ADDED) {
+                            final ModelParticipant modelParticipant = mDocument.getDocument().toObject(ModelParticipant.class);
+                            firestore1.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    for (DocumentChange querySnapshot1 : value.getDocumentChanges()) {
+                                        if (querySnapshot1.getType() == DocumentChange.Type.ADDED) {
+                                            ModelUser User = querySnapshot1.getDocument().toObject(ModelUser.class);
+                                            if (modelParticipant.getUid().equals(User.getUid()) && !modelParticipant.getUid().equals(fUser.getUid())) {
+                                                userList.add(User);
+                                            }
+                                            adapterUser = new AdapterUser(getActivity(), userList);
+                                            recyclerView.setAdapter(adapterUser);
+                                        }
+                                    }
 
+                                }
+
+                            });
+
+                        }
+
+                    }
+                }
+            });
 
 
         } else {

@@ -23,6 +23,7 @@
         <activity
             android:name=".ChatActivity"
             android:theme="@style/SinToolbar" />
+
         <activity
             android:name=".AddUserGroup"
             android:theme="@style/SinToolbar" />
