@@ -67,7 +67,7 @@ public class PerfilUsuario extends Fragment {
     TextView lastName_User, firstName_User, email_User;
     FloatingActionButton floatingActionButton;
     ProgressDialog progressDialog;
-    CardView cardView;
+    CardView cardView,cardViewsoporte,cardViewplan,cardViewcontraseña;
     //permisos contants
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 200;
@@ -104,7 +104,10 @@ public class PerfilUsuario extends Fragment {
         email_User = view.findViewById(R.id.email_User);
         floatingActionButton = view.findViewById(R.id.fab);
         progressDialog = new ProgressDialog(getActivity());
-
+        cardViewplan=view.findViewById(R.id.card_plan);
+        cardView=view.findViewById(R.id.card_administrador);
+        cardViewsoporte=view.findViewById(R.id.card_soporte);
+        cardViewcontraseña=view.findViewById(R.id.card_password);
         collectionReference=firebaseFirestore.collection("users");
         user = firebaseAuth.getCurrentUser();
         uid=user.getUid();
@@ -117,6 +120,26 @@ public class PerfilUsuario extends Fragment {
 
             }
         });
+
+        cardViewplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1=new Intent(getContext(),TypePlan.class);
+                startActivity(intent1);
+            }
+        });
+
+        cardViewsoporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(getContext(),Support.class);
+                startActivity(intent2);
+            }
+        });
+
+
+
+
         return view;
 
     }
