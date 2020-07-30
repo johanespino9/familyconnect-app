@@ -111,6 +111,7 @@ public class AddUserGroup extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                sendEmail(email);
                                                 Toast.makeText(AddUserGroup.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 Toast.makeText(AddUserGroup.this, "Envio fallido", Toast.LENGTH_SHORT).show();
@@ -181,6 +182,11 @@ public class AddUserGroup extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void sendEmail(String email) {
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, "Codigo de verificacion de grupo", timeStamp);
+        javaMailAPI.execute();
     }
 
 }
