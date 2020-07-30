@@ -1,8 +1,9 @@
 package com.johanespino.familyconnect
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             //Comprobacion de campos
             if (!email.isEmpty() && !password.isEmpty()) {
                 signIn(view, email, password)
+
             } else {
                 Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_LONG).show()
             }
@@ -51,10 +53,23 @@ class MainActivity : AppCompatActivity() {
 //    val editText = findViewById<EditText>(R.id.editText)
 //    val message = editText.text.toString()
 
-        val intent = Intent(this, HomeActivity::class.java).apply {
+
+        //añadir para listar usuarios pero para el participante
+        //realizar consulta a la coleccion de grupos luego intentar una consulta
+        //Buscar el metodo para sharedpreferences en fragment
+        val preferences: SharedPreferences = getSharedPreferences("groupcredenciales", Context.MODE_PRIVATE)
+        val groupid = preferences.getString("groupId", "No existe la informacion")
+        if ("No existe la informacion" == groupid||groupid.isNullOrBlank()) {
+            val intent = Intent(this, CodeVerificationActivity::class.java);
+            startActivity(intent)
+
+        } else {
+            val intent = Intent(this, HomeActivity::class.java).apply {
 //      putExtra(EXTRA_MESSAGE, message)
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
+
     }
 
     private fun registerUser() {
@@ -69,23 +84,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun signIn(view: View, email: String, password: String) {
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Bienvenido $email", Toast.LENGTH_SHORT).show()
-                    Log.d("SIGIN", "signInWithEmail:success")
                     redirectActivity()
+
                     finish()
                 } else {
-                    Log.w("SIGIN", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Autenticación fallida",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(baseContext, "Autenticación fallida", Toast.LENGTH_SHORT).show()
                 }
             }
+
+
     }
 }
