@@ -63,7 +63,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.MyHolder> {
                         if (which == 0) {
                             //para el perfil
                             Intent intent = new Intent(context, ChatActivity.class);
-                            intent.putExtra("uid", hisUID);
+                            intent.putExtra("SuUID", hisUID);
                             context.startActivity(intent);
                         }
                         if (which == 1) {
