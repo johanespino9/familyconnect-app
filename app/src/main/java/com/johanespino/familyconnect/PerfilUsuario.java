@@ -3,8 +3,10 @@ package com.johanespino.familyconnect;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,6 +52,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -64,10 +67,10 @@ public class PerfilUsuario extends Fragment {
     private StorageReference storageReference;
     String storagePath = "Users_Profile_Imgs/";
     ImageView avatarTv;
-    TextView lastName_User, firstName_User, email_User;
+    TextView lastName_User, firstName_User, email_User, role_User, group_User;
     FloatingActionButton floatingActionButton;
     ProgressDialog progressDialog;
-    CardView cardView,cardViewsoporte,cardViewplan,cardViewcontraseña;
+    CardView cardView, cardViewsoporte, cardViewplan, cardViewcontraseña;
     //permisos contants
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 200;
@@ -79,7 +82,9 @@ public class PerfilUsuario extends Fragment {
     String storagePermissions[];
     Uri image_uri;
     String uid;
+    String groupid;
     String profileOrCoverPhoto;
+
     public PerfilUsuario() {
 
     }
@@ -92,7 +97,7 @@ public class PerfilUsuario extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        cardView=view.findViewById(R.id.card_administrador);
+        cardView = view.findViewById(R.id.card_administrador);
         storageReference = FirebaseStorage.getInstance().getReference();//firebase storage reference
         //remover la idea de los distritos cambiar los datos anteriores alinearlo al del video, usar solo la estructura del video.
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -102,15 +107,17 @@ public class PerfilUsuario extends Fragment {
         firstName_User = view.findViewById(R.id.firstName_User);
         lastName_User = view.findViewById(R.id.lastName_User);
         email_User = view.findViewById(R.id.email_User);
+        role_User = view.findViewById(R.id.roleTV);
+        group_User = view.findViewById(R.id.groupidTV);
         floatingActionButton = view.findViewById(R.id.fab);
         progressDialog = new ProgressDialog(getActivity());
-        cardViewplan=view.findViewById(R.id.card_plan);
-        cardView=view.findViewById(R.id.card_administrador);
-        cardViewsoporte=view.findViewById(R.id.card_soporte);
-        cardViewcontraseña=view.findViewById(R.id.card_password);
-        collectionReference=firebaseFirestore.collection("users");
+        cardViewplan = view.findViewById(R.id.card_plan);
+        cardView = view.findViewById(R.id.card_administrador);
+        cardViewsoporte = view.findViewById(R.id.card_soporte);
+        cardViewcontraseña = view.findViewById(R.id.card_password);
+        collectionReference = firebaseFirestore.collection("users");
         user = firebaseAuth.getCurrentUser();
-        uid=user.getUid();
+        uid = user.getUid();
         checkUserStatus();
         getUserProfile(uid);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +131,7 @@ public class PerfilUsuario extends Fragment {
         cardViewplan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent(getContext(),TypePlan.class);
+                Intent intent1 = new Intent(getContext(), TypePlan.class);
                 startActivity(intent1);
             }
         });
@@ -132,34 +139,36 @@ public class PerfilUsuario extends Fragment {
         cardViewsoporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(getContext(),Support.class);
+                Intent intent2 = new Intent(getContext(), Support.class);
                 startActivity(intent2);
             }
         });
-
-
-
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("groupcredenciales", Context.MODE_PRIVATE);
+        groupid = preferences.getString("groupId", "No existe la informacion");
 
         return view;
 
     }
 
-    public void getUserProfile(String uid){
+    public void getUserProfile(String uid) {
         firebaseFirestore.collection("users").document(uid).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value.exists()){
-                    String firstName=value.getString("firstName");
-                    String lastName=value.getString("lastName");
-                    String email=value.getString("email");
-                    String role=value.getString("role");
-                    String image=value.getString("imagen");
+                if (value.exists()) {
+                    String firstName = value.getString("firstName");
+                    String lastName = value.getString("lastName");
+                    String email = value.getString("email");
+                    String role = value.getString("role");
+                    String image = value.getString("imagen");
                     firstName_User.setText(firstName);
                     lastName_User.setText(lastName);
                     email_User.setText(email);
-                    if(!role.equals("admin")){
+                    group_User.setText("ID de grupo: "+groupid);
+                    if (!role.equals("admin")) {
+                        role_User.setText("Participante");
                         cardView.setVisibility(View.GONE);
-                    } else{
+                    } else {
+                        role_User.setText("Administrador");
                         cardView.setVisibility(View.VISIBLE);
                     }
                     try {
@@ -167,10 +176,10 @@ public class PerfilUsuario extends Fragment {
                     } catch (Exception ex) {
                         Picasso.get().load(R.drawable.ic_profile_default).into(avatarTv);
                     }
+                }
             }
-        }
 
-    });
+        });
     }
 
     private void pickFromCamera() {
@@ -221,7 +230,7 @@ public class PerfilUsuario extends Fragment {
                     progressDialog.setMessage("Actualizando foto de perfil");
                     profileOrCoverPhoto = "imagen";
                     showImageDialog();
-                }  else if (which == 1) {
+                } else if (which == 1) {
                     progressDialog.setMessage("Actualizando Nombre");
                     //llamar metodo y pasar la llave "nombre"
                     showNamePhoneUpdateDialog("firstName");
@@ -233,6 +242,7 @@ public class PerfilUsuario extends Fragment {
         });
         builder.create().show();
     }
+
     private void showNamePhoneUpdateDialog(final String key) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Actualizar");
@@ -311,6 +321,7 @@ public class PerfilUsuario extends Fragment {
 
         builder.create().show();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

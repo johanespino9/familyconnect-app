@@ -168,12 +168,12 @@ public class AddUserGroup extends AppCompatActivity {
     private void cargarCredenciales() {
         final FirebaseAuth auth2 = FirebaseAuth.getInstance();
         SharedPreferences preferences = getSharedPreferences("credenciales", MODE_PRIVATE);
-        String correo = preferences.getString("email", "No existe la informacion");
+        final String correo = preferences.getString("email", "No existe la informacion");
         String password = preferences.getString("password", "No existe la informacion");
         auth2.signInWithEmailAndPassword(correo, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
+                sendEmail(correo);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -185,7 +185,7 @@ public class AddUserGroup extends AppCompatActivity {
     }
 
     public void sendEmail(String email) {
-        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, "Codigo de verificacion de grupo", timeStamp);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, "Codigo de verificacion de grupo","Su codigo de verifiacion es: "+timeStamp);
         javaMailAPI.execute();
     }
 
