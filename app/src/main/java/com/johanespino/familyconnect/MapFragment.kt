@@ -22,19 +22,24 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_map.*
 
 
-class MapFragment : Fragment(), OnMapReadyCallback{
-    private lateinit var  googleMap: GoogleMap
+class MapFragment : Fragment(), OnMapReadyCallback {
+    private lateinit var googleMap: GoogleMap
     private lateinit var lat: TextView
     private lateinit var log: TextView
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    private lateinit var dataBase: FirebaseFirestore
+    private lateinit var uid: String;
+
     // que es el permission ID?
-    private val PERMISSION_ID=42;
+    private val PERMISSION_ID = 42;
     private lateinit var mFausedLocationProviderClient: FusedLocationProviderClient
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -56,7 +61,9 @@ class MapFragment : Fragment(), OnMapReadyCallback{
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         lat = view.findViewById(R.id.tv_map_latitude)
         log = view.findViewById(R.id.tv_map_longitude)
-        mFausedLocationProviderClient= LocationServices.getFusedLocationProviderClient(requireActivity())
+        dataBase = FirebaseFirestore.getInstance()
+        mFausedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         getLastlocation();
         mLocationCallback
         return view
@@ -70,74 +77,86 @@ class MapFragment : Fragment(), OnMapReadyCallback{
     }
 
     //Revisar el estado del usuario
-    private fun checkUserStatus(){
+    private fun checkUserStatus() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            //Si esta logeado se mantiene aqui
+            uid = user.uid;
         } else {
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
             activity?.finish()
-        }}
+        }
+    }
 
     @SuppressLint("MissingPermission")
     private fun getLastlocation() {
-        if(checkPermission()){
-            if(isLocationEnabled()){
-                mFausedLocationProviderClient.lastLocation.addOnCompleteListener(requireActivity()){task ->
-                    val location: Location?= task.result
-                    if(location == null){
+        if (checkPermission()) {
+            if (isLocationEnabled()) {
+                mFausedLocationProviderClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    val location: Location? = task.result
+                    if (location == null) {
                         requestNewLocationgData()
-                    }else{
-                        lat.text= location.latitude.toString();
-                        log.text=location.longitude.toString();
+                    } else {
+                        lat.text = location.latitude.toString();
+                        log.text = location.longitude.toString();
                         latitude = location.latitude
                         longitude = location.longitude
+
+                        val dRef = dataBase.collection("users").document(uid)
+                        val hashMap = HashMap<String, Any>()
+                        hashMap["lat"] = location.latitude.toString()
+                        hashMap["lng"] = location.longitude.toString()
+                        dRef.update(hashMap)
+
+
                     }
 
                 }
-            }else{
-                Toast.makeText(context,"Enciende tu ubicacion", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Enciende tu ubicacion", Toast.LENGTH_SHORT).show()
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }
-        }else{
+        } else {
             requestPermissions()
         }
     }
-    @SuppressLint( "MissingPermission")
-    private  fun requestNewLocationgData(){
-        var mLocationRequet = LocationRequest();
-        mLocationRequet.priority= LocationRequest.PRIORITY_HIGH_ACCURACY
-        mLocationRequet.interval=0
-        mLocationRequet.fastestInterval=0
-        mLocationRequet.numUpdates=1
 
-        mFausedLocationProviderClient=LocationServices.getFusedLocationProviderClient(requireActivity())
+    @SuppressLint("MissingPermission")
+    private fun requestNewLocationgData() {
+        var mLocationRequet = LocationRequest();
+        mLocationRequet.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequet.interval = 0
+        mLocationRequet.fastestInterval = 0
+        mLocationRequet.numUpdates = 1
+
+        mFausedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         mFausedLocationProviderClient.requestLocationUpdates(
-            mLocationRequet,mLocationCallback,
+            mLocationRequet, mLocationCallback,
             Looper.myLooper()
         )
     }
 
-    private  val mLocationCallback=object : LocationCallback(){
+    private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
-            var mLastLocation:Location=p0.lastLocation
+            var mLastLocation: Location = p0.lastLocation
             latitude = mLastLocation.latitude
             longitude = mLastLocation.longitude
-            lat.text= mLastLocation.latitude.toString();
-            log.text=mLastLocation.longitude.toString();
+            lat.text = mLastLocation.latitude.toString();
+            log.text = mLastLocation.longitude.toString();
         }
     }
 
-    private fun isLocationEnabled():Boolean{
-        val locationManger: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private fun isLocationEnabled(): Boolean {
+        val locationManger: LocationManager =
+            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManger.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManger.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
     }
 
-    private  fun checkPermission():Boolean{
+    private fun checkPermission(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -151,16 +170,24 @@ class MapFragment : Fragment(), OnMapReadyCallback{
         }
         return false
     }
+
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             requireActivity(),
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
             PERMISSION_ID
         )
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 getLastlocation()
@@ -208,7 +235,6 @@ class MapFragment : Fragment(), OnMapReadyCallback{
         map?.moveCamera(CameraUpdateFactory.newLatLng(myMarker))
     }
 }
-
 
 
 //package com.johanespino.familyconnect
