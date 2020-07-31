@@ -8,8 +8,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -52,6 +51,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         docRef?.get()
             ?.addOnSuccessListener { document ->
 
+
+
                 val user = a?.uid?.let { dataBase.collection("users").document(it) }
 
                 user?.get()?.addOnSuccessListener { user ->
@@ -62,9 +63,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val otherMarker = LatLng(document.getString("lat")!!.toDouble(),document.getString("lng")!!.toDouble())
                     val zoomLevel = 16.0f
 
+                    var polyline1: Polyline = googleMap.addPolyline( PolylineOptions()
+                            .clickable(true)
+                        .add(myMarker, otherMarker))
+
+                    polyline1.tag = "A"
+
                     map?.moveCamera(CameraUpdateFactory.newLatLngZoom(myMarker, zoomLevel))
-                    map?.addMarker(MarkerOptions().position(myMarker).title("Yo"))
-                    map?.addMarker(MarkerOptions().position(otherMarker).title("Otro usuario"))
+                    var im = map?.addMarker(MarkerOptions().position(myMarker).title("Yo"))
+                    var friend = map?.addMarker(MarkerOptions().position(otherMarker).title("Otro usuario"))
+
+                    im.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_foreground))
+                    friend.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_foreground))
                     map?.moveCamera(CameraUpdateFactory.newLatLng(myMarker))
                 } else {
                     Log.d("a", "No such document")
