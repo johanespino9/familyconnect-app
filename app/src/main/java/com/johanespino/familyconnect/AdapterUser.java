@@ -57,13 +57,13 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.MyHolder> {
 
                 //visualizar dialogo
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setItems(new String[]{"Perfil", "Chat"}, new DialogInterface.OnClickListener() {
+                builder.setItems(new String[]{"Ubicar Persona", "Chat"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
                             //para el perfil
-                            Intent intent = new Intent(context, ChatActivity.class);
-                            intent.putExtra("SuUID", hisUID);
+                            Intent intent = new Intent(context, MapsActivity.class);
+//                            intent.putExtra("SuUID", hisUID);
                             context.startActivity(intent);
                         }
                         if (which == 1) {

@@ -28,6 +28,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         checkUserStatus()
+
+//        fragment = BuscarMascotaFragment()
+//        (getActivity() as Main2Activity).loadFragment(fragment)
+
 //BottomNavigation
         val navigationView = findViewById<BottomNavigationView>(R.id.btn_nav)
         navigationView.setOnNavigationItemSelectedListener(selectedListener)
@@ -87,7 +91,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_locate -> {
                     //home fragment transaction
                     val fragment1 =
-                        MapFragment()
+                        ListUserFragment()
                     val ft1 = supportFragmentManager.beginTransaction()
                     ft1.replace(R.id.content, fragment1, "")
                     ft1.commit()
