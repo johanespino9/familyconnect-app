@@ -10,10 +10,22 @@
     android:layout_centerHorizontal="true">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button_alerts"
+        android:id="@+id/floating_button_locate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginVertical="280dp"
+        android:src="@drawable/ic_alert"
+        app:backgroundTint="@color/ic_launcher_background" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_btn_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginVertical="280dp"
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_map"
         app:backgroundTint="@color/ic_launcher_background" />
@@ -22,6 +34,7 @@
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 
     <TextView
         android:id="@+id/tv_map_latitude"
