@@ -41,7 +41,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.MyHolder> {
         String userLastName = userList.get(i).getLastName();
         final String userEmail = userList.get(i).getEmail();
         //colocar data
-        String userCompleteName=userName+" "+userLastName;
+        String userCompleteName = userName + " " + userLastName;
         myHolder.nNameIv.setText(userCompleteName);
         myHolder.nEmailIv.setText(userEmail);
         try {
@@ -63,7 +63,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.MyHolder> {
                         if (which == 0) {
                             //para el perfil
                             Intent intent = new Intent(context, MapsActivity.class);
-//                            intent.putExtra("SuUID", hisUID);
+                            intent.putExtra("SuUID", hisUID);
                             context.startActivity(intent);
                         }
                         if (which == 1) {
