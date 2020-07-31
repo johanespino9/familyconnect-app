@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
         // Colocamos el String
         //args.putString("timeStamp", timeStamp)
         // Supongamos que tu Fragment se llama TestFragment. Colocamos este nuevo Bundle como argumento en el fragmento.
-        val fragment1 = PerfilUsuario()
+        val fragment1 = MapFragment()
         //fragment1.setArguments(args)
         val ft1 = supportFragmentManager.beginTransaction()
         ft1.replace(R.id.content, fragment1, "")
