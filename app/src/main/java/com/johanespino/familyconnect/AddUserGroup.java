@@ -80,6 +80,8 @@ public class AddUserGroup extends AppCompatActivity {
                     doc.put("role", "participante");
                     doc.put("onlineStatus", "online");
                     doc.put("imagen", "");
+                    doc.put("lat", "");
+                    doc.put("lng", "");
 
                     //subir a firestore
                     db.collection("users").document(uid).set(doc)

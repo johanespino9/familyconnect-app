@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,11 +21,14 @@ class UserRegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var etEmail: EditText;
     private lateinit var etPassword: EditText;
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
 
     //    private lateinit var dataBase: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
+
+        mFusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
         auth = Firebase.auth
         val dataBase = FirebaseFirestore.getInstance()
@@ -78,6 +83,8 @@ class UserRegisterActivity : AppCompatActivity() {
         lastName: String,
         database: FirebaseFirestore
     ) {
+
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -91,7 +98,10 @@ class UserRegisterActivity : AppCompatActivity() {
                         "email" to email,
                         "onlineStatus" to "online",
                         "role" to "admin",
-                        "imagen" to ""
+                        "imagen" to "",
+                        "lat" to "",
+                        "lng" to ""
+
                     )
 
                     registerUserInDB(userToCreate, database)

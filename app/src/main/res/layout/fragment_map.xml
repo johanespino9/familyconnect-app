@@ -9,36 +9,24 @@
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true">
 
-    <LinearLayout
-        android:id="@+id/mapa"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_map_latitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="300dp"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:layout_margin="10dp"
+        android:text="Latitude"
+        android:textAlignment="center" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="MAPA"
-            android:textAlignment="center" />
+    <TextView
+        android:id="@+id/tv_map_longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/tv_map_latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Latitude"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_map_longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Longitude"
-            android:textAlignment="center" />
-
-
-    </LinearLayout>
 </FrameLayout>
