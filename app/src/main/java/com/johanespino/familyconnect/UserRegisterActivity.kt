@@ -53,15 +53,20 @@ class UserRegisterActivity : AppCompatActivity() {
 
                 if (password.length >= 8) {
                     Log.d("LENGTH", "Password es mayor a 8 ")
-                    registerUser(
-                        email.toString(),
-                        password.toString(),
-                        firstName.toString(),
-                        lastName.toString(),
-                        dataBase
-                    )
-                    Toast.makeText(this, "Usuario Registrado correctamente", Toast.LENGTH_SHORT)
-                        .show()
+                    if(password.equals(repeatedPassword)){
+                        registerUser(
+                            email.toString(),
+                            password.toString(),
+                            firstName.toString(),
+                            lastName.toString(),
+                            dataBase
+                        )
+                        Toast.makeText(this, "Usuario Registrado correctamente", Toast.LENGTH_SHORT)
+                            .show()
+                    }else{
+                        Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
                     Toast.makeText(
                         this,

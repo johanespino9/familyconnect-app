@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,7 +30,12 @@ public class CodeVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String groupid = txtcode.getText().toString();
-                savePreferencesGroup(groupid);
+
+                if(groupid.isEmpty()){
+                    savePreferencesGroup(groupid);
+                }else{
+                    Toast.makeText(CodeVerificationActivity.this,"Ingrese un codigo de verificacion",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
