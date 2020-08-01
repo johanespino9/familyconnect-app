@@ -21,6 +21,7 @@ class UserRegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var etEmail: EditText;
     private lateinit var etPassword: EditText;
+    private lateinit var etRepeatedPassword: EditText;
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
 
     //    private lateinit var dataBase: FirebaseFirestore
@@ -28,7 +29,7 @@ class UserRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
 
-        mFusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         auth = Firebase.auth
         val dataBase = FirebaseFirestore.getInstance()
@@ -36,7 +37,7 @@ class UserRegisterActivity : AppCompatActivity() {
         val etLastName = findViewById<EditText>(R.id.et_last_name)
         etEmail = findViewById(R.id.et_email)
         etPassword = findViewById(R.id.et_password)
-        val etRepeatedPassword = findViewById<EditText>(R.id.et_repeated_password)
+        etRepeatedPassword = findViewById(R.id.et_repeated_password)
         val btnNext = findViewById<Button>(R.id.btn_next)
 
 
@@ -51,9 +52,9 @@ class UserRegisterActivity : AppCompatActivity() {
 
             if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !repeatedPassword.isEmpty()) {
 
-                if (password.length >= 8) {
+                if (password.length >= 8 && repeatedPassword.length >= 8) {
                     Log.d("LENGTH", "Password es mayor a 8 ")
-                    if(password.equals(repeatedPassword)){
+                    if (password.toString() == repeatedPassword.toString()) {
                         registerUser(
                             email.toString(),
                             password.toString(),
@@ -63,8 +64,9 @@ class UserRegisterActivity : AppCompatActivity() {
                         )
                         Toast.makeText(this, "Usuario Registrado correctamente", Toast.LENGTH_SHORT)
                             .show()
-                    }else{
-                        Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                 } else {

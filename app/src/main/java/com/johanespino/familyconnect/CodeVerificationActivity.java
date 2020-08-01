@@ -30,11 +30,10 @@ public class CodeVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String groupid = txtcode.getText().toString();
-
-                if(groupid.isEmpty()){
+                if (!groupid.equals("")) {
                     savePreferencesGroup(groupid);
-                }else{
-                    Toast.makeText(CodeVerificationActivity.this,"Ingrese un codigo de verificacion",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(CodeVerificationActivity.this, "Ingrese el codigo de verificacion", Toast.LENGTH_SHORT).show();
                 }
             }
         });
