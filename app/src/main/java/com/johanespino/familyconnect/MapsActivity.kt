@@ -46,11 +46,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var a = auth.currentUser
 
 
-
         val docRef = hisUid?.let { dataBase.collection("users").document(it) }
         docRef?.get()
             ?.addOnSuccessListener { document ->
-
 
 
                 val user = a?.uid?.let { dataBase.collection("users").document(it) }
@@ -58,37 +56,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 user?.get()?.addOnSuccessListener { user ->
 
 
-                if (document != null) {
-                    val myMarker = LatLng(user.getString("lat")!!.toDouble(), user.getString("lng")!!.toDouble())
-                    val otherMarker = LatLng(document.getString("lat")!!.toDouble(),document.getString("lng")!!.toDouble())
-                    val zoomLevel = 16.0f
+                    if (document != null) {
+                        val myMarker = LatLng(
+                            user.getString("lat")!!.toDouble(),
+                            user.getString("lng")!!.toDouble()
+                        )
+                        val otherMarker = LatLng(
+                            document.getString("lat")!!.toDouble(),
+                            document.getString("lng")!!.toDouble()
+                        )
+                        val zoomLevel = 16.0f
 
-                    var polyline1: Polyline = googleMap.addPolyline( PolylineOptions()
-                            .clickable(true)
-                        .add(myMarker, otherMarker))
+                        var polyline1: Polyline = googleMap.addPolyline(
+                            PolylineOptions()
+                                .clickable(true)
+                                .add(myMarker, otherMarker)
+                        )
 
-                    polyline1.tag = "A"
+                        polyline1.tag = "A"
 
-                    map?.moveCamera(CameraUpdateFactory.newLatLngZoom(myMarker, zoomLevel))
-                    var im = map?.addMarker(MarkerOptions().position(myMarker).title("Yo"))
-                    var friend = map?.addMarker(MarkerOptions().position(otherMarker).title("Otro usuario"))
+                        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(myMarker, zoomLevel))
+                        var im = map?.addMarker(MarkerOptions().position(myMarker).title("Yo"))
+                        var friend = map?.addMarker(
+                            MarkerOptions().position(otherMarker).title("Otro usuario")
+                        )
 
-                    im.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_foreground))
-                    friend.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_foreground))
-                    map?.moveCamera(CameraUpdateFactory.newLatLng(myMarker))
-                } else {
-                    Log.d("a", "No such document")
-                }
+                        im.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_mapa_round))
+                        friend.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_mapa_round))
+                        map?.moveCamera(CameraUpdateFactory.newLatLng(myMarker))
+                    } else {
+                        Log.d("a", "No such document")
+                    }
 
                 }
             }
             ?.addOnFailureListener { exception ->
                 Log.d("a", "get failed with ", exception)
             }
-
-
-
-
 
 
     }
